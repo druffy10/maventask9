@@ -9,7 +9,7 @@ public class TasksTest {
     public void setUp() {
         todos = new Todos();
         todos.add(new SimpleTask(1, "Купить продукты"));
-        todos.add(new Epic(2, new String[] {"Написать код", "Протестировать код"}));
+        todos.add(new Epic(2, new String[]{"Написать код", "Протестировать код"}));
         todos.add(new Meeting(3, "Проверить код", "Project X", "1 июня 2023, 12-00"));
     }
 
@@ -22,7 +22,7 @@ public class TasksTest {
 
     @Test
     public void epicMatchesTest() {
-        String[] subtasks = { "Написать код", "Протестировать код" };
+        String[] subtasks = {"Написать код", "Протестировать код"};
         Epic epic = new Epic(2, subtasks);
         Assertions.assertEquals(true, epic.matches("код"));
         Assertions.assertEquals(false, epic.matches("развертывание"));
