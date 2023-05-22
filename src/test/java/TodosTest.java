@@ -1,43 +1,33 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TodosTest {
     private Todos todos;
 
-
-    @Test
-    public void searchTestMultipleMatches() {
-        Todos todos = new Todos();
+    @BeforeEach
+    public void setUp() {
+        todos = new Todos();
         todos.add(new SimpleTask(1, "Купить продукты"));
         todos.add(new Epic(2, new String[]{"Написать код", "Протестировать код"}));
         todos.add(new Meeting(3, "Проверить код", "Project X", "1 июня 2023, 12-00"));
+    }
 
+    @Test
+    public void searchTestMultipleMatches() {
         Task[] result = todos.search("код");
-
         Assertions.assertEquals(2, result.length);
     }
 
     @Test
     public void searchTestSingleMatch() {
-        Todos todos = new Todos();
-        todos.add(new SimpleTask(1, "Купить продукты"));
-        todos.add(new Epic(2, new String[]{"Написать код", "Протестировать код"}));
-        todos.add(new Meeting(3, "Проверить код", "Project X", "1 июня 2023, 12-00"));
-
         Task[] result = todos.search("продукты");
-
         Assertions.assertEquals(1, result.length);
     }
 
     @Test
     public void searchTestNoMatches() {
-        Todos todos = new Todos();
-        todos.add(new SimpleTask(1, "Купить продукты"));
-        todos.add(new Epic(2, new String[]{"Написать код", "Протестировать код"}));
-        todos.add(new Meeting(3, "Проверить код", "Project X", "1 июня 2023, 12-00"));
-
         Task[] result = todos.search("выход");
-
         Assertions.assertEquals(0, result.length);
     }
 
